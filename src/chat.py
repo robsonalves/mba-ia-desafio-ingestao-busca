@@ -1,13 +1,31 @@
-from search import search_prompt
+from search import search_and_answer
+
 
 def main():
-    chain = search_prompt()
+    print("=" * 50)
+    print("Chat RAG - Pergunte sobre o documento")
+    print("Digite 'sair' para encerrar")
+    print("=" * 50)
 
-    if not chain:
-        print("Não foi possível iniciar o chat. Verifique os erros de inicialização.")
-        return
-    
-    pass
+    while True:
+        try:
+            pergunta = input("\nFaça sua pergunta: ").strip()
+
+            if pergunta.lower() in ["sair", "exit", "quit"]:
+                print("Encerrando...")
+                break
+
+            if not pergunta:
+                continue
+
+            print("\nProcessando...")
+            resposta = search_and_answer(pergunta)
+            print(f"\nRESPOSTA: {resposta}")
+
+        except KeyboardInterrupt:
+            print("\n\nEncerrando...")
+            break
+
 
 if __name__ == "__main__":
     main()
